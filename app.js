@@ -9,7 +9,8 @@ const app = express();
 var items = ["Buy food", "Cook food", "Eat food"]
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.get("/", function (req, res) {
 	//use Date method from java script to get day.
