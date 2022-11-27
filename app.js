@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get("/", function (req, res) {
 	//use Date method from java script to get day.
-	var today = new Date();
+	let today = new Date();
+
 	//js object to create a day with seeking information 
 	var options = {
 		weekday: "long",
@@ -23,7 +24,9 @@ app.get("/", function (req, res) {
 		minute: "2-digit"
 	}
 
-	var day = today.toLocaleDateString("en-ll", options)
+	let day = today.toLocaleDateString("en-ll", options)
+
+	//we pass in two variables kindOfDay and newListItems which we have in our ejs file
 
 	res.render("list",
 		{ kindOfDay: day, newListItems: items })
@@ -32,7 +35,7 @@ app.get("/", function (req, res) {
 // to add items in a form
 app.post("/", function (req, res) {
 	//add a new item, push the item back to server and from server back to browser (here the item get added on teh home route)
-	var item = req.body.newItem
+	let item = req.body.newItem
 	items.push(item);
 	res.redirect("/");
 
