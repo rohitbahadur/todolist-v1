@@ -6,19 +6,20 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.get("/", function (req, res) {
-	//sending the browser the word hello when the user access the home route which is / in here (res is teh response from our server)
+	//use Date method from java script to get day.
 
 	var day = new Date();
 	var currentDay = day.getDay();
-
+	var day = "";
 	if (currentDay === 6 || currentDay === 0) {
-		res.write("<h1>Yay! it weekend</h1>")
+		day = "weekend"
 	} else {
-		res.write("<p> Oh No, its weekeday <p>")
-		res.write("<h1> I have to work </h1>")
+		day = "weekday"
 	}
-	res.send();
+	res.render("list", { kindOfDay: day })
 });
 
 // we are listening the app @port 3000
