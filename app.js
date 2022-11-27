@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
 	//add a new item, push the item back to server and from server back to browser (here the item get added on teh home route)
-	let item = req.body.newEntry
+	let item = req.body.newItem
 	items.push(item);
 	res.redirect("/");
 
@@ -52,7 +52,7 @@ app.get("/work", function (req, res) {
 
 app.post("/work", function (req, res) {
 
-	let item = req.body.newEntry
+	let item = req.body.newItem
 	workItems.push(item);
 	res.redirect("/work")
 })
