@@ -16,7 +16,7 @@ app.get("/", function (req, res) {
 	let today = new Date();
 
 	//js object to create a day with seeking information 
-	var options = {
+	let options = {
 		weekday: "long",
 		day: "numeric",
 		month: "long",
