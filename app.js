@@ -31,6 +31,7 @@ app.get("/", function (req, res) {
 	//we pass in two variables kindOfDay and newListItems which we have in our ejs file
 
 	res.render("list", { listTitle: day, newListItems: items })
+
 });
 
 // to add items in a form
@@ -52,6 +53,9 @@ app.post("/", function (req, res) {
 app.get("/work", function (req, res) {
 	res.render("list", { listTitle: "Work List", newListItems: workItems })
 })
+
+
+
 
 // we are listening the app @port 3000
 app.listen(3000, function () {
