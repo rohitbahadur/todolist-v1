@@ -31,8 +31,7 @@ app.get("/", function (req, res) {
 
 	//we pass in two variables kindOfDay and newListItems which we have in our ejs file
 
-	res.render("list",
-		{ listTitle: day, newListItems: items })
+	res.render("list", { listTitle: day, newListItems: items })
 });
 
 // to add items in a form
