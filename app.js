@@ -47,15 +47,11 @@ app.post("/", function (req, res) {
 		res.redirect("/")
 	}
 
-	//console.log(item)
 });
 
 app.get("/work", function (req, res) {
 	res.render("list", { listTitle: "Work List", newListItems: workItems })
 })
-
-
-
 
 // we are listening the app @port 3000
 app.listen(3000, function () {
