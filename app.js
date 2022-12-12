@@ -54,10 +54,6 @@ app.get("/", function (req, res) {
 
 	//we pass in two variables kindOfDay and newListItems which we have in our ejs file
 
-
-
-
-
 	Item.find({}, function (err, foundItems) {
 		if (foundItems.length === 0) {
 			Item.insertMany(defaultItems, function (err) {
@@ -87,9 +83,21 @@ app.post("/", function (req, res) {
 	res.redirect("/");
 });
 
-app.get("/work", function (req, res) {
-	res.render("list", { listTitle: "Work List", newListItems: workItems })
-})
+app.post("/delete", function (req, res) {
+	const checkedItemId = req.body.checkbox;
+	Item.findOneAndDelete(checkedItemId, function (err) {
+		if (!err) {
+			res.redirect("/")
+		}
+	});
+});
+
+//adding 
+
+
+// app.get("/work", function (req, res) {
+// 	res.render("list", { listTitle: "Work List", newListItems: workItems })
+// })
 
 
 // we are listening the app @port 3000
