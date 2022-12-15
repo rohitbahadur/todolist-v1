@@ -73,7 +73,7 @@ app.get("/", function (req, res) {
 // to add items in a form
 
 app.post("/", function (req, res) {
-	//add a new item, push the item back to server and from server back to browser (here the item get added on teh home route)
+	//add a new item, push the item back to server and from server back to browser (here the item get added on the home route)
 	const itemName = req.body.newItem;
 
 	const item = new Item({
