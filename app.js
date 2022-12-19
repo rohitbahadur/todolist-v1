@@ -37,6 +37,14 @@ const item3 = new Item({
 //create a new array of items
 const defaultItems = [item1, item2, item3];
 
+const listSchema = {
+	name: String,
+	items: [itemsSchema]
+
+};
+
+const List = mongoose.model("List", listSchema);
+
 app.get("/", function (req, res) {
 	//use Date method from java script to get day.
 	let today = new Date();
@@ -70,17 +78,50 @@ app.get("/", function (req, res) {
 	});
 });
 
+app.get("/:customeListName", function (req, res) {
+
+	const customListName = req.params.customeListName;
+
+	List.findOne({ name: customListName }, function (err, foundList) {
+		if (!err) {
+
+			if (!foundList) {
+				const list = new List({
+					name: customListName,
+					items: defaultItems
+				});
+				list.save();
+				res.redirect("/" + customListName);
+			} else {
+				res.render("list", { listTitle: foundList.name, newListItems: foundList.items });
+			}
+		}
+	});
+});
+
+
 // to add items in a form
 
 app.post("/", function (req, res) {
 	//add a new item, push the item back to server and from server back to browser (here the item get added on teh home route)
 	const itemName = req.body.newItem;
+	const listName = req.body.list;
 
 	const item = new Item({
 		name: itemName
 	});
-	item.save();
-	res.redirect("/");
+
+	if (listName === "Today") {
+		item.save();
+		res.redirect("/");
+	} else {
+		List.findOne({ name: listName }, function (err, foundList) {
+			foundList.items.push(item);
+			foundList.save();
+			res.redirect("/" + listName)
+		});
+	}
+
 });
 
 app.post("/delete", function (req, res) {
@@ -92,12 +133,6 @@ app.post("/delete", function (req, res) {
 	});
 });
 
-//adding 
-
-
-// app.get("/work", function (req, res) {
-// 	res.render("list", { listTitle: "Work List", newListItems: workItems })
-// })
 
 
 // we are listening the app @port 3000
