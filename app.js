@@ -102,7 +102,7 @@ app.post("/", function (req, res) {
 	const itemName = req.body.newItem;
 	const listName = req.body.list;
 
-//create-cust-list
+	//create-cust-list
 	const item = new Item({
 		name: itemName
 	});
@@ -117,13 +117,6 @@ app.post("/", function (req, res) {
 			res.redirect("/" + listName)
 		});
 	}
-
-=======
-	const item = new Item({ name: itemName });
-	
-	item.save();
-	res.redirect("/");
-
 });
 
 app.post("/delete", function (req, res) {
