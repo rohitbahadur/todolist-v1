@@ -23,16 +23,11 @@ const itemsSchema = {
 //model for schema
 const Item = mongoose.model("Item", itemsSchema);
 
-const item1 = new Item({
-	name: "Apple"
-});
+const item1 = new Item({ name: "Apple" });
 
-const item2 = new Item({
-	name: "Banana"
-});
-const item3 = new Item({
-	name: "Mango"
-});
+const item2 = new Item({ name: "Banana" });
+
+const item3 = new Item({ name: "Mango" });
 
 //create a new array of items
 const defaultItems = [item1, item2, item3];
@@ -103,10 +98,11 @@ app.get("/:customeListName", function (req, res) {
 // to add items in a form
 
 app.post("/", function (req, res) {
-	//add a new item, push the item back to server and from server back to browser (here the item get added on teh home route)
+	//add a new item, push the item back to server and from server back to browser (here the item get added on the home route)
 	const itemName = req.body.newItem;
 	const listName = req.body.list;
 
+//create-cust-list
 	const item = new Item({
 		name: itemName
 	});
@@ -122,10 +118,17 @@ app.post("/", function (req, res) {
 		});
 	}
 
+=======
+	const item = new Item({ name: itemName });
+	
+	item.save();
+	res.redirect("/");
+
 });
 
 app.post("/delete", function (req, res) {
 	const checkedItemId = req.body.checkbox;
+
 	Item.findOneAndDelete(checkedItemId, function (err) {
 		if (!err) {
 			res.redirect("/")
