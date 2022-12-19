@@ -133,8 +133,6 @@ app.post("/delete", function (req, res) {
 	});
 });
 
-
-
 // we are listening the app @port 3000
 app.listen(3000, function () {
 	console.log("Server started on port 3000.");
